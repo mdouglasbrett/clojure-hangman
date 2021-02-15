@@ -10,6 +10,9 @@
     (recur progress' (inc guesses))))
 
 (defn next-guess [player, progress])
-(defn new-progress []) ;; TODO: I think I'm missing an arg here
-(defn update-progress [progress word guess])
-(defn complete? [progress])
+(defn new-progress [word]
+  (repeat (count word) \_))
+(defn update-progress [progress word guess]
+  (map #(if (= %1 guess) guess %2) word progress))
+(defn complete? [progress word]
+  (= progress (seq word)))
