@@ -3,11 +3,11 @@
 (defn game
   [word, player]
   (loop [progress (new-progress word), guesses 1]
-    let [guess, (next-guess player progress)
+    (let [guess, (next-guess player progress)
          progress' (update-progress progress word guess)]
-    if (complete? progress' word)
+      (if (complete? progress' word)
     guesses
-    (recur progress' (inc guesses))))
+    (recur progress' (inc guesses))))))
 
 (defn next-guess [player, progress])
 (defn new-progress [word]
@@ -16,3 +16,9 @@
   (map #(if (= %1 guess) guess %2) word progress))
 (defn complete? [progress word]
   (= progress (seq word)))
+
+(defprotocol Player
+  (next-guess [player progress]))
+
+(defonce letters
+  (mapv char (range (int \a) (inc (int \z)))))
