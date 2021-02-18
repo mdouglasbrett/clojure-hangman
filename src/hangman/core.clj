@@ -9,7 +9,6 @@
     guesses
     (recur progress' (inc guesses))))))
 
-(defn next-guess [player, progress])
 (defn new-progress [word]
   (repeat (count word) \_))
 (defn update-progress [progress word guess]
@@ -18,7 +17,7 @@
   (= progress (seq word)))
 
 (defprotocol Player
-  (next-guess [player progress]))
+  (next-guess [player progress])) ;; Protocols just provide a signature, implementation comes later
 
 (defonce letters
   (mapv char (range (int \a) (inc (int \z)))))
